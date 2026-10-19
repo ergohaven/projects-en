@@ -1,0 +1,21 @@
+name: Deploy production landing
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: Approved full source commit SHA in ergohaven/projects
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    uses: ergohaven/projects/.github/workflows/production-pages.yml@15af5e1d2c382ceb5425abfd71c9d916e313cb88
+    with:
+      locale: en
+      source_ref: ${{ inputs.source_ref }}
